@@ -13,6 +13,6 @@ public class PrimeController {
 
   @GetMapping("/new-prime")
   public BigInteger newPrime() {
-    return primeService.genPrimeNumber(10_000);
+    return primeService.genPrimeNumber(1_000);
   }
 }
