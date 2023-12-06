@@ -9,9 +9,8 @@ import com.poja.prime.repository.DummyRepository;
 import com.poja.prime.repository.DummyUuidRepository;
 import com.poja.prime.repository.model.Dummy;
 import com.poja.prime.repository.model.DummyUuid;
+import com.poja.prime.util.Prime;
 import java.util.List;
-import java.util.Random;
-
 import lombok.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,20 +23,8 @@ public class HealthController {
   DummyRepository dummyRepository;
   DummyUuidRepository dummyUuidRepository;
   EventProducer eventProducer;
+  Prime prime;
 
-  public  boolean isPrime(int nombre) {
-    if (nombre <= 1) {
-      return false;
-    }
-
-    for (int i = 2; i <= Math.sqrt(nombre); i++) {
-      if (nombre % i == 0) {
-        return false;
-      }
-    }
-
-    return true;
-  }
   @GetMapping("/ping")
   public String ping() {
     return "pong";
@@ -45,12 +32,7 @@ public class HealthController {
 
   @GetMapping("/new-prime")
   public int newPrime() {
-    Random random = new Random();
-    int primeNumber = random.nextInt(Integer.MAX_VALUE) + 1;
-    while (!isPrime(primeNumber)) {
-      primeNumber = random.nextInt(Integer.MAX_VALUE) + 1;
-    }
-    return primeNumber;
+    return prime.genPrimeNumber();
   }
 
   @GetMapping("/dummy-table")
