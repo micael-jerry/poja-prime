@@ -9,7 +9,6 @@ import com.poja.prime.repository.DummyRepository;
 import com.poja.prime.repository.DummyUuidRepository;
 import com.poja.prime.repository.model.Dummy;
 import com.poja.prime.repository.model.DummyUuid;
-import com.poja.prime.util.Prime;
 import java.util.List;
 import lombok.Value;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,16 +22,10 @@ public class HealthController {
   DummyRepository dummyRepository;
   DummyUuidRepository dummyUuidRepository;
   EventProducer eventProducer;
-  Prime prime;
 
   @GetMapping("/ping")
   public String ping() {
     return "pong";
-  }
-
-  @GetMapping("/new-prime")
-  public int newPrime() {
-    return prime.genPrimeNumber();
   }
 
   @GetMapping("/dummy-table")
